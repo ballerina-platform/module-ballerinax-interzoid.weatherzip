@@ -2,13 +2,22 @@
 
 The `ballerinax/interzoid.weatherzip` connector provides practical examples illustrating usage in various scenarios.
 
-[//]: # (TODO: Add examples)
-1. 
-2. 
+1. **[City weather report](https://github.com/ballerina-platform/module-ballerinax-interzoid.weatherzip/tree/main/examples/city_weather_report)** - Look up the current weather for a list of US zip codes and print a summary line for each.
+
+2. **[Weather alert monitor](https://github.com/ballerina-platform/module-ballerinax-interzoid.weatherzip/tree/main/examples/weather_alert_monitor)** - Flag zip codes whose wind speed or temperature crosses configured thresholds.
 
 ## Prerequisites
 
-[//]: # (TODO: Add prerequisites)
+1. Register for an Interzoid API license key at [Interzoid](https://www.interzoid.com/register-api-account).
+
+2. For each example, create a `Config.toml` file with the related configuration. Here's an example of how your Config.toml file should look:
+
+```toml
+license = "<interzoid-license-key>"
+zipCodes = "14201,10001"
+```
+
+Each example lists the additional values it needs in its own README.
 
 ## Running an example
 

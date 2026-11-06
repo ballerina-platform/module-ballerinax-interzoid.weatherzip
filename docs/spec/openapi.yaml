@@ -1,0 +1,174 @@
+
+openapi: 3.0.3
+info:
+  title: Get Current US Weather from Zip Code API
+  description: >
+    This API retrieves current weather data for a given US zip code using real-time weather information from reliable sources.
+
+    To use this API, you need an API key. Register for an API key at [Interzoid Registration](https://www.interzoid.com/register-api-account).
+
+    For more information about this API, visit the [Interzoid Current Weather Zip Code API Documentation](https://www.interzoid.com/apis/current-weather-zip-code).
+
+    You can also try this API [interactively](https://try.interzoid.com) or in high-speed [batch mode](https://batch.interzoid.com).
+  version: 1.0.0
+  contact:
+    name: Interzoid Support
+    url: https://www.interzoid.com
+    email: support@interzoid.com
+externalDocs:
+  description: API home page and documentation
+  url: https://www.interzoid.com/apis/current-weather-zip-code
+servers:
+  - url: https://api.interzoid.com
+    description: Production server
+tags:
+  - name: Current Weather by Zip Code
+    description: Provides current weather data based on a US zip code.
+paths:
+  /getweatherzipcode:
+    get:
+      operationId: getWeatherByZipCode
+      tags:
+        - Current Weather by Zip Code
+      summary: Retrieve Current Weather by Zip Code
+      description: >
+        Retrieves current weather data for a given US zip code. Include your API key (license) in the request. Register for an API key at https://www.interzoid.com/register-api-account.
+      parameters:
+        - name: zip
+          in: query
+          required: true
+          description: The US zip code for which weather data is retrieved.
+          schema:
+            type: string
+          example: "14201"
+      responses:
+        '200':
+          description: Successful response containing the current weather data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  City:
+                    type: string
+                    description: The city associated with the zip code.
+                  State:
+                    type: string
+                    description: The state associated with the zip code.
+                  TempF:
+                    type: string
+                    description: Temperature in Fahrenheit.
+                  TempC:
+                    type: string
+                    description: Temperature in Celsius.
+                  Weather:
+                    type: string
+                    description: Current weather condition.
+                  WindMPH:
+                    type: string
+                    description: Wind speed in miles per hour.
+                  WindDir:
+                    type: string
+                    description: Wind direction.
+                  RelativeHumidity:
+                    type: string
+                    description: Relative humidity percentage.
+                  VisibilityMiles:
+                    type: string
+                    description: Visibility in miles.
+                  PrecipitationLastHour:
+                    type: string
+                    description: Precipitation in the last hour.
+                  WindChill:
+                    type: string
+                    description: Wind chill temperature in Fahrenheit.
+                  HeatIndex:
+                    type: string
+                    description: Heat index, if applicable (otherwise "NA").
+                  Code:
+                    type: string
+                    description: Response code, "Success" if the call is successful.
+                  Credits:
+                    type: string
+                    description: Remaining credits for your API license.
+              examples:
+                success:
+                  value:
+                    City: "Buffalo"
+                    State: "NY"
+                    TempF: "31"
+                    TempC: "-0.6"
+                    Weather: "Cloudy"
+                    WindMPH: "22"
+                    WindDir: "W"
+                    RelativeHumidity: "63"
+                    VisibilityMiles: "10"
+                    PrecipitationLastHour: "0"
+                    WindChill: "21"
+                    HeatIndex: "NA"
+                    Code: "Success"
+                    Credits: "20063378"
+        '400':
+          description: Bad request (e.g., missing or invalid parameters).
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                error:
+                  value: "Invalid license key or zip code missing."
+        '402':
+          description: API key not found.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                error:
+                  value: "API key not found."
+        '403':
+          description: Insufficient API credits remaining.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                error:
+                  value: "Insufficient API credits remaining."
+        '405':
+          description: Method not allowed.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                error:
+                  value: "Method not allowed."
+        '429':
+          description: Rate limits reached.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                error:
+                  value: "Rate limits reached."
+        '500':
+          description: Internal server error.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                error:
+                  value: "Internal server error."
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      name: license
+      in: query
+      description: Interzoid API license key supplied as the license query parameter
+  schemas: {}
+security:
+  - apiKeyAuth: []
